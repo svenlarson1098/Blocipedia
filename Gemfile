@@ -19,7 +19,8 @@
  gem 'jquery-rails'
  gem 'turbolinks'
  gem 'bootstrap-sass'
- gem 'figaro'
+ # Store Sendgrid and Devise credentials
+ gem 'figaro', '1.0'
 
  group :development, :test do
    gem 'byebug'
@@ -29,4 +30,5 @@
    gem 'faker'
    gem 'factory_bot_rails'
    gem 'pry-rails'
+   gem 'devise'
  end
