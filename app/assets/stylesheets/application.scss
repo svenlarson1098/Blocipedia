@@ -16,3 +16,10 @@
  *= require_tree .
  *= require_self
  */
+.alert-success {
+position: sticky;
+text-align: inherit;
+ top: 41px;
+  left: 125;
+  right: 0;
+}

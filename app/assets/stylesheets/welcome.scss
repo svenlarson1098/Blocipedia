@@ -1,5 +1,9 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.flash-container
-padding: 40px 20px 10px 20px;
+.alert-success {
+position: fixed;
+ top: 147px;
+  left: 0;
+  right: 0;
+}
