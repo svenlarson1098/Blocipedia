@@ -4,4 +4,6 @@ class WelcomeController < ApplicationController
 
   def about
   end
+  
+  @wikis = Wiki.all
 end
