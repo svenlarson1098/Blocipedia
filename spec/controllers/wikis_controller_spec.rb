@@ -1,4 +1,5 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe WikisController, type: :controller do
   
@@ -13,11 +14,11 @@ RSpec.describe WikisController, type: :controller do
     
     it "assigns [my_wiki] to @wikis" do
       get :index
-      expect(response).to have_http_status(:success)
+      expect(assigns(:wikis)).to eq([my_wiki])
     end
   end
 
-
+#=begin
   #describe "GET #show" do
    # it "returns http success" do
     #  get :show
@@ -69,7 +70,7 @@ RSpec.describe WikisController, type: :controller do
   
   describe "POST create" do
     it "increases the number of Wiki by 1" do
-      expect{ post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false} } }.to change(Wiki, :count).by(1)
+      expect{ post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false} } }.to change(Wiki,:count).by(1)
     end
   
     it "assigns the new wiki to @wiki" do
@@ -77,7 +78,7 @@ RSpec.describe WikisController, type: :controller do
       expect(assigns(:wiki)).to eq Wiki.last
     end
     
-    it "redirect to the new wiki" do
+    it "redirects to the new wiki" do
       post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false}}
       expect(response).to redirect_to Wiki.last
     end
@@ -102,7 +103,20 @@ end
     new_body = RandomData.random_paragraph
     
     put :update, params: { id: my_wiki.id, wiki: { title: new_title, body: new_body, private: false } }
-    expect(response).to redirect_to wikis_path
+    expect(response).to redirect_to my_wiki
 end
 end
+
+  describe "DELETE destroy" do
+    it "deletes the wiki" do
+      delete :destroy, params: { id: my_wiki.id }
+      count = Wiki.where({id: my_wiki.id }).size
+      expect(count).to eq 0
+    end
+    
+    it "redirects to wikis index" do
+      delete :destroy, params: { id: my_wiki.id }
+      expect(response).to redirect_to wikis_path
+    end
+  end
 end

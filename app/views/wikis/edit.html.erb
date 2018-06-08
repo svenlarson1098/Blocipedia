@@ -1,2 +1,26 @@
-<h1>Wikis#edit</h1>
-<p>Find me in app/views/wikis/edit.html.erb</p>
+<h1>Edit Wiki</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul>
+        <li>Accuracy is king, no trolling.</li>
+        <li>Cryptocurrency allowed, no banner spattering!</li>
+        <li>Keep it clean, people...</li>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <%= form_for @wiki do |f| %>
+        <div class="form-group">
+          <%= f.label :body %>
+          <%= f.text_field :title, class: 'form-control', placeholder: "Wiki Title" %>
+        </div>
+          <div class="form-group">
+            <%= f.label :body %>
+            <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: "Wiki Here" %>
+            </div>
+        <div class="form-group">
+          <%= f.submit "Save", class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
