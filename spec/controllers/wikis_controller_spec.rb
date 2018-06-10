@@ -5,7 +5,7 @@ RSpec.describe WikisController, type: :controller do
   
   let(:my_wiki) { Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false) }
   
-
+  
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -43,6 +43,23 @@ RSpec.describe WikisController, type: :controller do
     end
   end
   
+
+  describe "POST create" do
+    it "increases the number of Wiki by 1" do
+      expect{ post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false} } }.to change(Wiki,:count).by(1)
+    end
+  
+    it "assigns the new wiki to @wiki" do
+      post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false}}
+      expect(assigns(:wiki)).to eq Wiki.last
+    end
+    
+    it "redirects to the new wiki" do
+      post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false}}
+      expect(response).to redirect_to Wiki.last
+    end
+end
+  
   
   describe "GET #edit" do
     it "returns http success" do
@@ -68,21 +85,7 @@ RSpec.describe WikisController, type: :controller do
   end
   
   
-  describe "POST create" do
-    it "increases the number of Wiki by 1" do
-      expect{ post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false} } }.to change(Wiki,:count).by(1)
-    end
-  
-    it "assigns the new wiki to @wiki" do
-      post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false}}
-      expect(assigns(:wiki)).to eq Wiki.last
-    end
-    
-    it "redirects to the new wiki" do
-      post :create, params: { wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false}}
-      expect(response).to redirect_to Wiki.last
-    end
-end
+
 
   describe "PUT update" do
     it "updates wiki with expected attributes" do
