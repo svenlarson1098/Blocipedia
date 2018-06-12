@@ -32,4 +32,5 @@
    gem 'factory_bot_rails'
    gem 'pry-rails'
    gem 'devise'
+   gem 'pundit'
  end
