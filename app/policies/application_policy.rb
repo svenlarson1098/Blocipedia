@@ -50,7 +50,7 @@ class ApplicationPolicy
       scope
     end
   end
-  
+
   class WikiPolicy
     attr_reader :user, :wiki
     
@@ -58,7 +58,7 @@ class ApplicationPolicy
       @user = user
       @wiki = wiki
     end
-    
+   
     def update?
       user.admin? or not wiki.published?
     end
