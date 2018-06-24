@@ -33,4 +33,5 @@
    gem 'pry-rails'
    gem 'devise'
    gem 'pundit'
+   gem 'stripe'
  end
