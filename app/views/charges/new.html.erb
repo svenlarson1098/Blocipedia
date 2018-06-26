@@ -2,7 +2,30 @@
 <br>
 <br>
 <div class="jumbotron">
-   <h4>To be inducted to the Blocipedia Secret Society, click the button!</h4>
+
+   <label class="amount">
+     <p>Upgrade to Premium Blocipedia Secret Society for $5.</p>
+     </label>
+   </article>
+
+   <h4>To be inducted to the Blocipedia Secret Society, click Pay button.</h4>
    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
  <% end %>
- </div>
+<br>
+<br>
+<div><small>Current Membership Level: <strong><%= current_user.role.capitalize %></strong></small></div>
+   <% if current_user.role == 'standard' %>
+        
+    <% if flash[:error].present? %>
+      <div> id="error_description"
+         <p><%= flash[:error] %></p>
+      </div>
+   <% end %>
+   <article>
+   
+   <% elsif current_user.role == 'premium' %>
+   <br/>
+   <%= link_to "Downgrade Account", downgrade_path, method: :put, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to cancel your premium membership?'} %>
+<% end %>
+
+</div>
