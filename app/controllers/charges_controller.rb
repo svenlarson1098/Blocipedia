@@ -24,7 +24,7 @@ def create
     )
 
   current_user.premium!
-  flash[:success] = "Thank you for your payment, #{current_user.email}! Welcome to the Society."
+  flash[:success] = "Thank you for your payment, #{current_user.email}! Welcome to the Blocipedia Secret Society."
   redirect_to root_path(current_user)
 
   

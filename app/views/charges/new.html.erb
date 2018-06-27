@@ -4,24 +4,25 @@
 <div class="jumbotron">
 
    <label class="amount">
-     <p>Upgrade to Premium Blocipedia Secret Society for $5.</p>
-     </label>
-   </article>
-
+     <h2>Upgrade to Premium Blocipedia Secret Society for $5.</h2>
+     <p> All Secret Society Members can create private wikis with paid membership.</p>
+   </label>
+  
+  </article>
    <h4>To be inducted to the Blocipedia Secret Society, click Pay button.</h4>
    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
  <% end %>
 <br>
 <br>
-<div><small>Current Membership Level: <strong><%= current_user.role.capitalize %></strong></small></div>
-   <% if current_user.role == 'standard' %>
-        
-    <% if flash[:error].present? %>
-      <div> id="error_description"
-         <p><%= flash[:error] %></p>
-      </div>
-   <% end %>
-   <article>
+    <div><small>Current Membership Level: <strong><%= current_user.role.capitalize %></strong></small></div>
+       <% if current_user.role == 'standard' %>
+    
+        <% if flash[:error].present? %>
+        <div> id="error_description"
+        <p><%= flash[:error] %></p>
+    </div>
+  <% end %>
+  <article>
    
    <% elsif current_user.role == 'premium' %>
    <br/>

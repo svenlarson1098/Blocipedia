@@ -3,7 +3,12 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @wikis = Wiki.all
+    if current_user.standard?
+      @wikis = Wiki.where(private: false)
+      
+    else
+      @wikis = Wiki.all
+    end
   end
 
   def show
@@ -15,10 +20,7 @@ class WikisController < ApplicationController
   end
   
   def create
-    #@wiki = Wiki.new
-    #@wiki.title = params[:wiki][:title]
-    #@wiki.body = params[:wiki][:body]
-    @wiki = current_user.wikis.new(wiki_params)
+     @wiki = current_user.wikis.new(wiki_params)
     
     if @wiki.save
       flash[:notice] = "Wiki saved!"
@@ -35,9 +37,6 @@ class WikisController < ApplicationController
   
   def update
     @wiki = Wiki.find(params[:id])
-    #@wiki.title = params[:wiki][:title]
-    #@wiki.body = params[:wiki][:body]
-    #authorize @wiki
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
      
@@ -68,6 +67,6 @@ class WikisController < ApplicationController
   private
   
   def wiki_params
-    params.require(:wiki).permit(:title, :body)
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end

@@ -9,7 +9,7 @@ require 'random_data'
 end
 
 #Create Standard User:
-1.times do
+3.times do
   User.create!(
     email: Faker::Internet.email,
     password: 'helloworld'
@@ -17,9 +17,9 @@ end
   end
 
 #Create Premium User
-1.times do
+2.times do
   User.create!(
-    email:  'svenlarson1098@gmail.com',
+    email:  Faker::Internet.email,
     password: 'helloworld',
     role: 1
     )
@@ -38,16 +38,24 @@ end
 users = User.all
 
 #Create wikis
-20.times do
+10.times do
   Wiki.create!(
     user: users.sample,
     title: Faker::Name.title, 
-    body: Faker::StarWars.quote
-    #body: RandomData.random_paragraph
+    body: Faker::StarWars.quote,
+    private: false
     )
 end
 
-wikis = Wiki.all
+#Create Private Wikis
+5.times do
+  Wiki.create!(
+    user: users.sample,
+    title: 'Private - ' + Faker::Name.title, 
+    body: Faker::StarWars.quote,
+    private: true
+    )
+end
 
 puts "Seeds finished"
 puts "#{Wiki.count} wikis created"
