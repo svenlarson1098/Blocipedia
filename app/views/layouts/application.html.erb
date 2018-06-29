@@ -13,8 +13,9 @@
   <div class="container">
     <nav class="navbar navbar-static-top">
     <ul class="nav nav-tabs">
-     <li><%= link_to "Home", root_path %></li>
-     <li><%= link_to "About", about_path %></li>
+     <li><%= link_to "Welcome", about_path %></li>
+     <li><%= link_to "Wikis", root_path %></li>
+     
      
     <% if user_signed_in? %>
       <li class="pull-right"><br>Signed in as: <small><strong><%= current_user.email %> - <%= current_user.role %></strong></small></li>

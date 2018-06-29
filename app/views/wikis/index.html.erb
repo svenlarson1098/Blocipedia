@@ -7,14 +7,12 @@
     </div>
     </div>
     </h1>
-    <div class="row align-items-center">
+      <div class="row align-items-center">
       <div class="col-md-10">
     <% @wikis.each do |wiki| %>
       <div class="media">
         <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to wiki.title, wiki_path(wiki.id) %>
-          </h4>
+          <h4 class="media-heading"><%=link_to markdown(wiki.title), wiki %></h4>
         </div>
       </div>
     <% end %>
