@@ -7,7 +7,7 @@ class WikisController < ApplicationController
      @wikis = Wiki.where(private: false)
       
     else
-      @wikis = Wiki.all
+      @wikis = policy_scope(Wiki)
     end
   end
 
