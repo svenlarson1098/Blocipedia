@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :charges
   put '/downgrade', to: 'downgrade#update', as: :downgrade
   
+  resources :collaborators, only: [:new, :create, :destroy]
+  
   devise_for :users
   
   get 'about' => 'welcome#about'
