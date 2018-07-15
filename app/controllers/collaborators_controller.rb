@@ -5,16 +5,16 @@ def new
 end
 
   def create
-    @collaborator_user = User.find_by email(params[:collaborator])
+    @collaborator_user = User.find_by_email(params[:collaborator])
     @wiki = Wiki.find(params[:wiki_id])
     
-    if wiki.collaborators.exists?(user_id: @collaborator_user.id)
+    if @wiki.collaborators.exists?(user_id: @collaborator_user.id)
       flash[:notice] = "#{@collaborator_user.email} is already a collaborator."
       redirect_to edit_wiki_path(@wiki)
       
     else
       @collaborator = Collaborator.new(wiki_id: @wiki.id, user_id: @collaborator_user.id)
-      
+    
     if @collaborator.save
       flash[:notice] = "#{@collaborator_user.email} was added as a collaborator."
       redirect_to edit_wiki_path(@wiki)
@@ -24,7 +24,7 @@ end
       redirect_to edit_wiki_path(@wiki)
     end
     end
-  end
+  end 
 
 def destroy
   @wiki = Wiki.find(params[:wiki_id])

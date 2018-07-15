@@ -15,10 +15,10 @@
     
     </div>
     
-    <div class="col-md-8">
+    <div class="col-md-12">
       <% if current_user.premium? || current_user.admin? %>
       <h3>Collaborators</h3>
-      <% @wiki_collaborator.each do |c| %>
+      <% @wiki.collaborators.each do |c| %>
         <% user = User.find(c.user_id) %>
         <%= user.email %>
         <% end %>

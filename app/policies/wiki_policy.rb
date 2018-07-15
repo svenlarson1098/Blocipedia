@@ -11,7 +11,7 @@ class WikiPolicy < ApplicationPolicy
     
   def resolve
     wikis =[]
-    if user.nil?
+    if user.role == 'admin' 
       wikis = scope.all
       
     elsif user.role == 'premium'
@@ -28,9 +28,9 @@ class WikiPolicy < ApplicationPolicy
       wikis = []
       all_wikis.each do |wiki|
         #if wiki.public? || wiki.collaborators.include?(user)
-          if !wiki.private || wiki.collaborators.include?(user)
+        if !wiki.private || wiki.collaborators.include?(user)
           wikis << wiki
-          end
+        end
       end
     end
     wikis
