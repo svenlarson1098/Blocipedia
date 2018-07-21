@@ -18,8 +18,7 @@ class WikiPolicy < ApplicationPolicy
       all_wikis = scope.all
       all_wikis.each do |wiki|
         
-        #if wiki.public? || wiki.owner == user || wiki.collaborators.include?(user)
-        if !wiki.private || user = wiki.user || wiki.collaborators.include?(user)
+        if !(wiki.private?) || user == wiki.user || wiki.collaborators.include?(user)
            wikis << wiki
         end
       end
@@ -27,8 +26,7 @@ class WikiPolicy < ApplicationPolicy
       all_wikis = scope.all
       wikis = []
       all_wikis.each do |wiki|
-        #if wiki.public? || wiki.collaborators.include?(user)
-        if !wiki.private || wiki.collaborators.include?(user)
+        if wiki.private != true || wiki.users.include?(user)
           wikis << wiki
         end
       end
