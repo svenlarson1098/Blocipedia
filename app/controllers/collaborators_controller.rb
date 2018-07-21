@@ -1,5 +1,6 @@
 class CollaboratorsController < ApplicationController
   
+<<<<<<< HEAD
 def new
   @collaborator = Collaborator.new  
 end
@@ -17,6 +18,28 @@ end
       
     if @collaborator.save
       flash[:notice] = "#{@collaborator_user.email} was added as a collaborator."
+=======
+
+def create
+    @user = User.where(email: params[:collaborator]).take
+    @wiki = Wiki.find(params[:wiki_id])
+    
+    if @user == nil
+      flash[:notice] = "User email could not be found."
+      redirect_to edit_wiki_path(@wiki)
+    
+    elsif @wiki.users.include?(@user)
+      flash[:notice] = "User is already a collaborator."
+      redirect_to edit_wiki_path(@wiki)
+
+    else
+      @collaborator = Collaborator.new
+      @collaborator.user_id = @user.id
+      @collaborator.wiki_id = @wiki.id
+    
+    if @collaborator.save
+      flash[:notice] = "New collaborator added."
+>>>>>>> wiki-collaborators
       redirect_to edit_wiki_path(@wiki)
     
     else
@@ -24,6 +47,7 @@ end
       redirect_to edit_wiki_path(@wiki)
     end
     end
+<<<<<<< HEAD
   end
 
 def destroy
@@ -33,6 +57,18 @@ def destroy
   
   if @collaborator.destroy
     flash[:notice] = "#{@collaborator_user.email} was removed as a collaborator."
+=======
+end
+
+def destroy
+  
+  @collaborator = Collaborator.find(params[:id])
+  @wiki = @collaborator.wiki
+  
+  
+  if @collaborator.destroy
+    flash[:notice] = "The collaborator was removed."
+>>>>>>> wiki-collaborators
     redirect_to edit_wiki_path(@wiki)
   
   else
