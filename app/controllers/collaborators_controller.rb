@@ -1,13 +1,9 @@
 class CollaboratorsController < ApplicationController
   
-#def new
- # @collaborator = Collaborator.new  
-#end
 
 def create
     @user = User.where(email: params[:collaborator]).take
     @wiki = Wiki.find(params[:wiki_id])
-    #@collaborator = Collaborator.new(wiki_id: params[:wiki_id], user_id: params[:user_id])
     
     if @user == nil
       flash[:notice] = "User email could not be found."
@@ -33,13 +29,11 @@ def create
     end
 end
 
-   
-
 def destroy
   
   @collaborator = Collaborator.find(params[:id])
   @wiki = @collaborator.wiki
-  #@collaborator_user = User.find(@collaborator.user_id)
+  
   
   if @collaborator.destroy
     flash[:notice] = "The collaborator was removed."

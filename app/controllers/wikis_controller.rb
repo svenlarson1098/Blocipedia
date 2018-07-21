@@ -45,8 +45,9 @@ class WikisController < ApplicationController
   end
     
   def show
-    @wiki = Wiki.find(params[:id])
+   @wiki = Wiki.find(params[:id])
   end
+  
     
   def destroy
     @wiki = Wiki.find(params[:id])
