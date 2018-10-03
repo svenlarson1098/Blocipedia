@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -18,10 +17,9 @@ ActiveRecord::Schema.define(version: 20180710232746) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_collaborators_on_user_id"
+    t.index ["wiki_id"], name: "index_collaborators_on_wiki_id"
   end
-
-  add_index "collaborators", ["user_id"], name: "index_collaborators_on_user_id"
-  add_index "collaborators", ["wiki_id"], name: "index_collaborators_on_wiki_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -41,11 +39,10 @@ ActiveRecord::Schema.define(version: 20180710232746) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "wikis", force: :cascade do |t|
     t.string   "title"
@@ -54,8 +51,7 @@ ActiveRecord::Schema.define(version: 20180710232746) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wikis_on_user_id"
   end
-
-  add_index "wikis", ["user_id"], name: "index_wikis_on_user_id"
 
 end
